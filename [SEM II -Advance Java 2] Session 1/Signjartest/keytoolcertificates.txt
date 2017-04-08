@@ -1,0 +1,18 @@
+Trong sign tao ra data.txt viet noi dung I love you
+
+1. C:\Users\Monkey.TNT\Desktop\Signjartest\verify>keytool     //bat cmd giu shift va chon
+
+2. keytool -genkeypair -alias sender -keystore senderKeystore
+
+3. jarsigner
+
+4. jarsigner -keystore senderKeystore -signedjar signdata.jar  data.jar sender
+5. keytool -exportcert -alias sender -file sender.cer  -keystore senderKeystore
+6. copy sender va signdata qua folder verify
+
+7. C:\Users\Monkey.TNT\Desktop\Signjartest\verify>keytool
+8. keytool -importcert -alias sender -file sender.cer -keystore receiverKeystore
+9. jarsigner -verify -keystore receiverKeystore signdata.jar
+
+10. jar -xvf signdata.jar
+

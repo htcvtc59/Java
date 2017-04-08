@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="1190" pageHeight="842" orientation="Landscape" columnWidth="1150" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d60947f1-c8d3-44cf-8376-7aa448e79e83">
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#EFF7FF"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="XepHangSach" uuid="a80e55e7-bb48-40df-96e8-3d81ca329ed1">
+		<queryString language="SQL">
+			<![CDATA[{call XepHangSach}]]>
+		</queryString>
+		<field name="DocumentId" class="java.lang.String"/>
+		<field name="DocumentName" class="java.lang.String"/>
+		<field name="PublisherId" class="java.lang.String"/>
+		<field name="Description" class="java.lang.String"/>
+		<field name="Author" class="java.lang.String"/>
+		<field name="Price" class="java.lang.String"/>
+		<field name="SoLg" class="java.lang.Integer"/>
+	</subDataset>
+	<queryString>
+		<![CDATA[{call XepHangSach}]]>
+	</queryString>
+	<field name="DocumentId" class="java.lang.String"/>
+	<field name="DocumentName" class="java.lang.String"/>
+	<field name="PublisherId" class="java.lang.String"/>
+	<field name="Description" class="java.lang.String"/>
+	<field name="Author" class="java.lang.String"/>
+	<field name="Price" class="java.lang.String"/>
+	<field name="SoLg" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="386" splitType="Stretch">
+			<barChart>
+				<chart evaluationTime="Report">
+					<reportElement x="172" y="100" width="795" height="286" uuid="a625641d-b0c0-45f8-9f6f-d767c543cd3a"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset>
+						<datasetRun subDataset="XepHangSach" uuid="50383841-c060-4f6c-bce0-479fb31c4629"/>
+					</dataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{DocumentId}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{DocumentName}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{SoLg}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<staticText>
+				<reportElement x="292" y="0" width="456" height="41" uuid="625e32b9-9916-4573-b4a1-ba7517b46164"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Xếp hạng sách mượn trong một tháng]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="32" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="86" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" x="233" y="0" width="360" height="50" uuid="f22034b7-7e14-446f-b735-10723fe3c6a8"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="XepHangSach" uuid="82f868b6-cfac-4cb0-96c4-7453c0f4ae3b">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="66630ee6-8552-4afb-bbaa-2d3ed6387443">
+						<jr:columnHeader style="table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="6271f4d7-ece6-4b28-a8ad-4c01fccba12f"/>
+								<text><![CDATA[DocumentId]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="24879f3e-b3a3-4b22-9fae-4ef40332cf1a"/>
+								<textFieldExpression><![CDATA[$F{DocumentId}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="ae4faa4f-b258-4e09-b369-d5fc69a7461f">
+						<jr:columnHeader style="table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="ab884cdd-dd3d-409c-b2f8-dbecad361add"/>
+								<text><![CDATA[DocumentName]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="a8980f60-19fe-49f3-b15b-a726f5bd23a0"/>
+								<textFieldExpression><![CDATA[$F{DocumentName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="4c424aee-84af-4364-bcc4-1fda72ab3072">
+						<jr:columnHeader style="table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="521bb4d3-3f49-4d02-ac12-42559e61d186"/>
+								<text><![CDATA[PublisherId]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="19828677-17e6-47c6-b640-66d5daa49b2c"/>
+								<textFieldExpression><![CDATA[$F{PublisherId}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="e16955e6-5b80-412c-9803-956b8c7db98a">
+						<jr:columnHeader style="table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="0d0645df-b7e8-4efb-9807-2fbdb64f188e"/>
+								<text><![CDATA[Description]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="64f961d9-b796-4fb7-9e34-55014fdfe353"/>
+								<textFieldExpression><![CDATA[$F{Description}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="35a6182f-c1dd-4ee5-9176-c1cdf488e441">
+						<jr:columnHeader style="table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="180bd198-6e5c-47cd-8e7f-4d382a054697"/>
+								<text><![CDATA[Author]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="fc379340-6cc4-4d0b-81b3-18ae52781af8"/>
+								<textFieldExpression><![CDATA[$F{Author}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="daefd390-2786-4f05-a5bb-9fc3c3a723f5">
+						<jr:columnHeader style="table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="7134f863-ab80-40dc-ad4b-69b1f2b899e5"/>
+								<text><![CDATA[Price]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="1be5df33-8b13-44e7-b4a8-c35c29fb9385"/>
+								<textFieldExpression><![CDATA[$F{Price}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="330817cd-a7dc-49e7-b311-c27880a2ff89">
+						<jr:columnHeader style="table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="31152f28-8d81-4928-969d-70772f551145"/>
+								<text><![CDATA[SoLg]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="3d87e32e-7285-4250-9f52-3d78015950eb"/>
+								<textFieldExpression><![CDATA[$F{SoLg}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="53" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
